@@ -1,42 +1,33 @@
-
-import NavBar from '../../components/NavBar/NavBar';
-import './Product.css';
+import { products } from "../../../Data/Product";
+import "./Product.css";
 
 export default function Products() {
   return (
-    <>
-    <main className="home">
-      <header className="home__header">
-        <h1>productos disponibles</h1>
-        <p>Tu Pagina de compra y venta de Confianza.</p>
-      </header>
-
-      <section className="home__about">
-        <h2>¿Quiénes somos?</h2>
-        <p>
-          
-        </p>
+    <main className="products-page">
+      <section className="products-main">
+        <header className="products-header">
+          <h1>Productos Disponibles</h1>
+          <p>Compra y venta de productos con confianza.</p>
+        </header>
+           <aside className="products-aside">
+           {}
+             <h3>Filtros</h3>
+           </aside>
+        <div className="products-list">
+          {products.map((item) => (
+            <article key={item.id} className="product-card">
+              <img
+                src={item.images[0]}
+                alt={item.name}
+                className="product-card__img"
+              />
+              <h3 className="product-card__name">{item.name}</h3>
+              <p className="product-card__price">${item.price}</p>
+              <button className="product-card__btn">Ver más</button>
+            </article>
+          ))}
+        </div>
       </section>
-
-      <section className="home__services">
-        <h2>Servicios destacados</h2>
-        <ul>
-          <li>Consultas médicas</li>
-          <li>Vacunación y desparasitación</li>
-          <li>Baños y peluquería</li>
-        </ul>
-      </section>
-
-      <aside className="home__aside">
-        <h3>Horarios de atención</h3>
-        <p>Lunes a Sábado — 9:00 a 19:00 hrs</p>
-        <p>Emergencias 24/7</p>
-      </aside>
-
-      <footer className="home__footer">
-        <p></p>
-      </footer>
     </main>
-    </>
   );
 }

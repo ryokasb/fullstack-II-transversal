@@ -1,8 +1,8 @@
 import './Cart.css';
-import NavBar from '../../components/NavBar/NavBar';
 
 export default function Cart() {
   return (
+    <main>
     <div>
     <div className="cart">
       <h2 className="cart__title">Carrito</h2>
@@ -12,5 +12,6 @@ export default function Cart() {
       <button className="cart__payButton">Pagar</button>
     </div>
     </div>
+    </main>
   );
 }

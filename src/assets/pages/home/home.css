@@ -4,7 +4,9 @@ html, body {
   height: 100%;
   width: 100%;
 }
-
+main {
+  margin-top: 80px; /* Ajusta según la altura de tu navbar */
+}
 .home {
   padding: 2rem;
   font-family: Arial, sans-serif;

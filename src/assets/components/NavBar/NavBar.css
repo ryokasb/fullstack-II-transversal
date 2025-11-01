@@ -6,6 +6,12 @@
   color: white;
   padding: 1rem 2rem;
   box-sizing: border-box;
+
+  position: fixed; /* Fija la barra en la pantalla */
+  top: 0;          /* Pegada a la parte superior */
+  left: 0;         /* Alineada al borde izquierdo */
+  width: 100%;     /* Ocupa todo el ancho */
+  z-index: 1000;   /* Para que quede encima del contenido */
 }
 .Search{
   display: flex;
