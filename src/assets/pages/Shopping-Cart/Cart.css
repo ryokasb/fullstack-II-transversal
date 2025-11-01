@@ -1,0 +1,35 @@
+.cart {
+  background: #1a1a1a;
+  color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  max-width: 400px;
+  margin: 2rem auto;
+  text-align: center;
+}
+
+.cart__title {
+  font-size: 1.8rem;
+  margin-bottom: 1rem;
+}
+
+.cart__empty {
+  margin: 1.5rem 0;
+  opacity: 0.8;
+}
+
+.cart__payButton {
+  background: #3b82f6;
+  color: white;
+  border: none;
+  font-size: 1.1rem;
+  padding: 0.8rem 1.2rem;
+  border-radius: 6px;
+  cursor: pointer;
+  width: 100%;
+  transition: 0.2s;
+}
+
+.cart__payButton:hover {
+  background: #2563eb;
+}

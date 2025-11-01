@@ -1,0 +1,35 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #111;
+  color: white;
+  padding: 1rem 2rem;
+  box-sizing: border-box;
+}
+
+.navbar__logo {
+  height: 50px;
+  width: auto;
+}
+
+.navbar__links {
+  flex: 1;
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  font-family: 'Courier New', Courier, monospace;
+  gap: 4rem;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar__links a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.navbar__links a:hover {
+  text-decoration: underline;
+}
