@@ -5,7 +5,6 @@ import './Home.css';
 export default function Home() {
   return (
     <>
-    <NavBar/>
     <main className="home">
       <header className="home__header">
         <h1>Bienvenido a DuoDeal</h1>

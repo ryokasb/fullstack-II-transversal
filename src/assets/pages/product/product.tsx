@@ -5,7 +5,6 @@ import './Product.css';
 export default function Products() {
   return (
     <>
-    <NavBar/>
     <main className="home">
       <header className="home__header">
         <h1>productos disponibles</h1>

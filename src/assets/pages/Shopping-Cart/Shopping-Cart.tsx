@@ -4,7 +4,6 @@ import NavBar from '../../components/NavBar/NavBar';
 export default function Cart() {
   return (
     <div>
-        <NavBar/>
     <div className="cart">
       <h2 className="cart__title">Carrito</h2>
       {}
