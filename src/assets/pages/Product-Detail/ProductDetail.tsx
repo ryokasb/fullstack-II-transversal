@@ -1,41 +1,27 @@
-import './ProductDetail.css';
+import { useParams } from "react-router-dom";
+import { products } from "../../../Data/Product";
+import './ProductDetail.css'
+export default function DetalleProducto() {
+  const { name } = useParams<{ name: string }>();
 
-function ProductDetail(){
-    return(
-        <main className="ProductDetail">
-            <aside className="product-detail__gallery"></aside>
+  if (!name) return <p>ID no encontrado</p>;
 
-            <section className="product-detail__content">
+  const producto = products.find((p) => p.name == name);
 
-                <header className="product-detail__header">
-                    <h1></h1>
-                    <span className="product-detail__price"></span>
-                    <span className="product-detail__stock"></span>
-                </header>
+  if (!producto) return <p>Producto no encontrado</p>;
 
-                <article className="product-detail__seller">
-                    <h2></h2>
-                    <p></p>
-                </article>
+  return (
+  <main className="detalle-container">
+  <div className="detalle-img-container">
+    <img src={producto.images[0]} alt={producto.name} />
+  </div>
 
-                <section className="product-detail__details">
-                    <h2></h2>
-                    <p></p>
-                </section>
-
-                <footer className="product-detail__actions">
-                    <button></button>
-                    <button></button>
-                </footer>
-
-            </section>
-
-            <aside className="product-detail__extras">
-                <section className="extras__location"></section>
-                <section className="extras__sponsored"></section>
-            </aside>
-        </main>   
-    )
+  <aside className="detalle-info">
+    <h1>{producto.name}</h1>
+    <p className="detalle-precio">${producto.price}</p>
+    <p>{producto.description}</p>
+     <button className="detalle-btn">Agregar al carrito</button>
+  </aside>
+</main>
+  );
 }
-
-export default ProductDetail
