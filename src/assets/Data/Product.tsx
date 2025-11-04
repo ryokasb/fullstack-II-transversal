@@ -1,10 +1,10 @@
-import minecraftImg from "../assets/images/Products/minecraft.png";
-import pcgamer from "../assets/images/Products/pcgamer.png";
-import ps3 from "../assets/images/Products/ps3.png";
-import ps4 from "../assets/images/Products/ps4slim.png";
-import ps5 from "../assets/images/Products/ps5.png";
-import N3dsxl from "../assets/images/Products/3dsxl.png";
-import { DiSafari } from "react-icons/di";
+import minecraftImg from "../images/Products/minecraft.png";
+import pcgamer from "../images/Products/pcgamer.png";
+import ps3 from "../images/Products/ps3.png";
+import ps4 from "../images/Products/ps4slim.png";
+import ps5 from "../images/Products/ps5.png";
+import N3dsxl from "../images/Products/3dsxl.png";
+
 
 export const products = [
   {
