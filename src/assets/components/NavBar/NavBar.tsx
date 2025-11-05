@@ -1,29 +1,38 @@
 import './NavBar.css';
-import logo from '../../images/LogoDuoDeal.png'; 
-import { FaShoppingCart, FaSearch } from 'react-icons/fa';
-import { Link } from 'react-router-dom'; 
+import logo from '../../images/LogoDuoDeal.png';
+import { FaShoppingCart } from 'react-icons/fa';
+
+import { Link } from 'react-router-dom';
 
 export default function NavBar() {
   return (
-    <nav className="navbar">
-      <Link to="/">
-        <img src={logo} alt="Logo DuoDeal" className="navbar__logo" />
-      </Link>
+    <nav className="navbar navbar-expand-lg fixed-top custom-nav px-4">
 
-      <div className='Search'>
-        <span>Buscar</span>
-        <input type="text" />
-        <button className='boton-buscar'>
-          <FaSearch size={24} />
-        </button>
+      <div className="navbar-brand d-flex align-items-center">
+        <img src={logo} alt="Logo DuoDeal" className="navbar__logo" />
       </div>
 
-      
-      <ul className="navbar__links">
-        <li><Link to="/">Inicio</Link></li>
-        <li><Link to="/productos">Productos</Link></li>
-      </ul>
-      <Link to="/carrito" className="navbar__cart">
+      <button
+        className="navbar-toggler bg-light"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navLinks"
+      >
+        <span className="navbar-toggler-icon"></span>
+      </button>
+
+      <div className="collapse navbar-collapse" id="navLinks">
+        <ul className="navbar-nav ms-4 gap-3">
+          <li className="nav-item">
+            <Link className="nav-link text-white" to="/">Inicio</Link>
+          </li>
+          <li className="nav-item">
+            <Link className="nav-link text-white" to="/productos">Productos</Link>
+          </li>
+        </ul>
+      </div>
+
+      <Link to="/carrito" className="navbar-cart ms-auto">
         <FaShoppingCart size={24} color="white" />
       </Link>
     </nav>

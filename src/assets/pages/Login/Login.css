@@ -23,24 +23,6 @@
   font-size: 2rem;
 }
 
-.Datos-usuario p {
-  text-align: left;
-  margin: 0.5rem 0 0.3rem;
-  font-size: 0.95rem;
-}
-
-.Datos-usuario input {
-  width: 100%;
-  padding: 0.7rem;
-  border-radius: 6px;
-  border: none;
-  outline: none;
-  margin-bottom: 1rem;
-  background: #222;
-  color: white;
-  font-size: 1rem;
-}
-
 .Datos-usuario input::placeholder {
   color: #bbb;
 }

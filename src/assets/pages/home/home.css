@@ -5,7 +5,7 @@ html, body {
   width: 100%;
 }
 main {
-  margin-top: 80px; /* Ajusta según la altura de tu navbar */
+  margin-top: 80px; 
 }
 .home {
   padding: 2rem;
@@ -23,17 +23,6 @@ main {
   margin-bottom: 2rem;
 }
 
-.home__services ul {
-  list-style-type: disc;
-  padding-left: 1.5rem;
-}
-
-.home__aside {
-  background-color: #f8f9fa;
-  padding: 1rem;
-  border-left: 4px solid #4caf50;
-  margin-bottom: 2rem;
-}
 
 .home__footer {
   text-align: center;
