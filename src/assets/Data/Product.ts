@@ -10,6 +10,7 @@ import nSwitch from "../images/Products/switch.png";
 
 export interface Product{
     id: number,
+    iduser:number,
     publicId: string,
     name: string,
     description: string,
@@ -22,6 +23,7 @@ export interface Product{
 export const products = [
   {
     id: 1,
+    iduser:2,
     publicId: "PRD-0001",
     name: "Minecraft Ps4",
     description: "Vendo minecraft de ps4",
@@ -32,6 +34,7 @@ export const products = [
   },
   {
     id: 2,
+    iduser:1,
     publicId: "PRD-0002",
     name: "Pc Gamer",
     description: "pc gamer r5 5600 gtx 1070",
@@ -42,6 +45,7 @@ export const products = [
   },
   {
     id: 3,
+    iduser:2,
     publicId: "PRD-0003",
     name: "Ps3",
     description: "ps3 en buen estado",
@@ -52,6 +56,7 @@ export const products = [
   },
   {
     id: 4,
+    iduser:1,
     publicId: "PRD-0004",
     name: "ps4 slim",
     description: "ps4 slim en buen estado",
@@ -62,6 +67,7 @@ export const products = [
   },
   {
     id: 5,
+    iduser:2,
     publicId: "PRD-0005",
     name: "ps5",
     description: "ps5 como nueva",
@@ -72,6 +78,7 @@ export const products = [
   },
   {
     id: 6,
+    iduser:1,
     publicId: "PRD-0006",
     name: "nintendo 3ds",
     description: "nintendo 3ds xl",
@@ -83,6 +90,7 @@ export const products = [
 
   {
     id: 7,
+    iduser:1,
     publicId: "PRD-0007",
     name: "iPad 8th Gen",
     description: "iPad 8 con cargador original",
@@ -93,6 +101,7 @@ export const products = [
   },
   {
     id: 8,
+    iduser:1,
     publicId: "PRD-0008",
     name: "Xbox One S",
     description: "Xbox One S 1TB + 1 control",
@@ -103,6 +112,7 @@ export const products = [
   },
   {
     id: 9,
+    iduser:2,
     publicId: "PRD-0009",
     name: "Nintendo Switch",
     description: "Switch V2 ",

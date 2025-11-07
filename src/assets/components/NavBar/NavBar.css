@@ -1,3 +1,9 @@
+.bienvenida p{
+  margin: 0px;
+  margin-right: 50px;
+  color: white;
+  padding: auto;
+}
 .custom-nav {
   background-color: #111;
 }

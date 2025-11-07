@@ -6,6 +6,7 @@ import Login from "../pages/Login/Login";
 import ProductDetail from "../pages/Product-Detail/ProductDetail";
 import { PrivateRoute } from "./PrivateRoute"; 
 import Register from "../pages/register/register";
+import Sell from "../pages/sell/sell";
 
 export const AppRouter = () => {
   return (
@@ -49,6 +50,16 @@ export const AppRouter = () => {
           </PrivateRoute>
         } 
       />
+      <Route 
+        path="/gestion" 
+        element={
+          <PrivateRoute>
+            <Sell />
+          </PrivateRoute>
+        } 
+      />
+
+
 
       <Route path="*" element={<Navigate to="/login" replace />} />
     </Routes>

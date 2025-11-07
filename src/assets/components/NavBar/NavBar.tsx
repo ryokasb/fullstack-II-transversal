@@ -2,31 +2,30 @@ import './NavBar.css';
 import logo from '../../images/LogoDuoDeal.png';
 import { FaShoppingCart } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
-import { closeSesion } from '../../Data/users';
+import { closeSesion, getCurrentUser } from '../../Data/users';
 import Swal from "sweetalert2";
 
 export default function NavBar() {
   const navigate = useNavigate();
+  const user = getCurrentUser();
 
- 
- 
-const handleLogout = () => {
-  Swal.fire({
-    title: "Cerrar sesión",
-    text: "¿Seguro que quieres cerrar sesión?",
-    icon: "warning",
-    showCancelButton: true,
-    confirmButtonColor: "#111",
-    cancelButtonColor: "#d33",
-    confirmButtonText: "Sí, cerrar sesión",
-    cancelButtonText: "Cancelar"
-      }).then((result) => {
-    if (result.isConfirmed) {
-      closeSesion();
-      navigate("/login");
-    }
-      });
-    };
+  const handleLogout = () => {
+    Swal.fire({
+      title: "Cerrar sesión",
+      text: "¿Seguro que quieres cerrar sesión?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#111",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Sí, cerrar sesión",
+      cancelButtonText: "Cancelar"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        closeSesion();
+        navigate("/login");
+      }
+    });
+  };
 
   return (
     <nav className="navbar navbar-expand-lg fixed-top custom-nav px-4">
@@ -49,19 +48,35 @@ const handleLogout = () => {
           <li className="nav-item">
             <Link className="nav-link text-white" to="/">Inicio</Link>
           </li>
-          <li className="nav-item">
-            <Link className="nav-link text-white" to="/productos">Productos</Link>
-          </li>
+          
+        
+           
+            {user?.typeuser === "Cliente" ? (
+                  <li className="nav-item">
+                     <Link className="nav-link text-white" to="/productos">Productos</Link>
+                  </li>
+               ) : (
+                    <li className="nav-item">
+                      <Link className="nav-link text-white" to="/gestion">Gestión productos </Link>
+                      </li>
+                )}
         </ul>
       </div>
 
-       <button className='btn-cerrarsesion' onClick={handleLogout}>
+      <div className='bienvenida'>
+        {user && <p>Bienvenido, {user.username}</p>}
+      </div>
+
+      <button className='btn-cerrarsesion' onClick={handleLogout}>
         Cerrar sesión
       </button>
 
-      <Link to="/carrito" className="navbar-cart ms-auto">
-        <FaShoppingCart size={24} color="white" />
-      </Link>
+      
+      {user?.typeuser === "Cliente" && (
+        <Link to="/carrito" className="navbar-cart ms-3">
+          <FaShoppingCart size={24} color="white" />
+        </Link>
+      )}
 
     </nav>
   );
