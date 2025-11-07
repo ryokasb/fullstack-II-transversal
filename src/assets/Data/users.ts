@@ -3,22 +3,11 @@ interface user{
     password: string,
     typeuser: string
 }
+
 export const users: user[] = [
-  {
-    username: "ryoka",
-    password: "1234",
-    typeuser: "Vendedor",
-  },
-  {
-    username: "choly",
-    password: "1234",
-    typeuser: "Vendedor",
-  },
-  {
-    username: "cliente",
-    password: "1234",
-    typeuser: "Cliente",
-  },
+  { username: "ryoka", password: "1234", typeuser: "Vendedor" },
+  { username: "choly", password: "1234", typeuser: "Vendedor" },
+  { username: "cliente", password: "1234", typeuser: "Cliente" },
 ];
 
 export function createUser(newUser: user) {

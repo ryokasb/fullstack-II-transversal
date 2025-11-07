@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { products } from "../../Data/Product";
 import './ProductDetail.css'
+import ProductCounter from "../../components/ProductCounter/ProductCounter";
 export default function DetalleProducto() {
   const { publicId } = useParams<{ publicId: string }>();
 
@@ -20,7 +21,7 @@ export default function DetalleProducto() {
     <h1>{producto.name}</h1>
     <p className="detalle-precio">${producto.price}</p>
     <p>{producto.description}</p>
-     <button className="detalle-btn">Agregar al carrito</button>
+    <ProductCounter productId={producto.publicId} />
   </aside>
 </main>
   );
