@@ -1,5 +1,6 @@
 import { useProductCounter } from "../../hooks/useProductCounter";
 import { addToCart } from "../../Data/shoppingcart";
+import Swal from 'sweetalert2';
 
 interface Props {
   productId: string;
@@ -17,6 +18,13 @@ export default function ProductCounter({ productId }: Props) {
     const user = JSON.parse(localStorage.getItem("user") || "null");
 
     addToCart(user.username, productId, quantity);
+     Swal.fire({
+        icon: "success",
+        title: "Producto agregado al carrito",
+        showConfirmButton: false,
+        timer: 1000
+      });
+    
     reset();
   };
 

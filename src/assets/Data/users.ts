@@ -4,7 +4,11 @@ interface User {
   password: string;
   typeuser: string;
 }
-
+interface createuser{
+  username: string;
+  password: string;
+  typeuser: string;
+}
 const defaultUsers: User[] = [
   { userid: 1 ,username: "ryoka", password: "1234", typeuser: "Vendedor" },
   { userid: 2 ,username: "choly", password: "1234", typeuser: "Vendedor" },
@@ -52,6 +56,8 @@ export function createUser(newUser: User) {
 
   return { success: true, message: "Usuario creado exitosamente" };
 }
+
+//----------------------------------------
 export function login(username: string, password: string) {
   const users = getUsers();
 
@@ -81,12 +87,12 @@ export function login(username: string, password: string) {
 
   return { success: true, message: "Login exitoso", user: userData };
 }
-
+//_------------------------------------
 export function getCurrentUser() {
   const stored = localStorage.getItem("user");
   return stored ? JSON.parse(stored) : null;
 }
-
+//-------------------------------------
 export function closeSesion() {
   localStorage.removeItem("user");
 }
