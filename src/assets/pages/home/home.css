@@ -4,9 +4,7 @@ html, body {
   height: 100%;
   width: 100%;
 }
-main {
-  margin-top: 80px; 
-}
+
 .home {
   padding: 2rem;
   font-family: Arial, sans-serif;

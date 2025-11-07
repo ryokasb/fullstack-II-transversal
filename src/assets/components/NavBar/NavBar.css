@@ -2,6 +2,19 @@
   background-color: #111;
 }
 
+.btn-cerrarsesion{
+  padding: 0.5rem;
+  background: white;
+  border: none;
+  margin-right: 25px;
+  border-radius: 6px;
+  color: black;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  transition: 0.2s;
+}
+
 .navbar__logo {
   height: 50px;
   width: auto;

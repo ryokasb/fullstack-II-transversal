@@ -1,11 +1,12 @@
 
 import NavBar from '../../components/NavBar/NavBar';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './Home.css';
 
 export default function Home() {
   return (
     <>
-    <main className="home">
+    <main className="home container mt-5 pt-5">
       <header className="home__header">
         <h1>Bienvenido a DuoDeal</h1>
         <p>Tu Pagina de compra y venta de Confianza.</p>
