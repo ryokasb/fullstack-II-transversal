@@ -24,7 +24,7 @@ function getUsers(): User[] {
 function saveUsers(users: User[]) {
   localStorage.setItem("users", JSON.stringify(users));
 }
-
+///funcion para crear un usuario 
 export function createUser(newUser: User) {
   const users = getUsers();
 
@@ -57,7 +57,7 @@ export function createUser(newUser: User) {
   return { success: true, message: "Usuario creado exitosamente" };
 }
 
-//----------------------------------------
+//-------funcion para logear
 export function login(username: string, password: string) {
   const users = getUsers();
 

@@ -22,7 +22,6 @@ export const AppRouter = () => {
           </PrivateRoute>
         } 
       />
-
       <Route 
         path="/productos" 
         element={
