@@ -6,7 +6,8 @@ import Login from "../pages/Login/Login";
 import ProductDetail from "../pages/Product-Detail/ProductDetail";
 import { PrivateRoute } from "./PrivateRoute"; 
 import Register from "../pages/register/register";
-import Sell from "../pages/sell/sell";
+import ProductEditor from "../pages/product-editor/producteditor";
+import Sell from "../pages/products-manager/ProductsManager";
 
 export const AppRouter = () => {
   return (
@@ -54,6 +55,14 @@ export const AppRouter = () => {
         element={
           <PrivateRoute>
             <Sell />
+          </PrivateRoute>
+        } 
+      />
+       <Route 
+        path="/gestion/:publicId" 
+        element={
+          <PrivateRoute>
+            <ProductEditor/>
           </PrivateRoute>
         } 
       />

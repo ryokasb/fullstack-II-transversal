@@ -1,12 +1,12 @@
-import './sell.css'
+import './ProductsManager.css'
 import { products } from "../../Data/Product";
+import { Link } from "react-router-dom";
 import { getCurrentUser } from "../../Data/users";
 
 function Sell() {
   const user = getCurrentUser();
-  const productosVendedor = products.filter(
-    (p) => p.iduser === user?.id
-  );
+  
+  const productosVendedor = products.filter((p) => p.iduser === user.id);
 
   return (
     <main className="sell-container container mt-5 pt-5">
@@ -17,7 +17,10 @@ function Sell() {
       ) : (
         <div className="productos-grid">
           {productosVendedor.map((item) => (
-            <div key={item.publicId} className="card producto-card border-0 shadow-sm p-3">
+            <div
+              key={item.publicId}
+              className="card producto-card border-0 shadow-sm p-3"
+            >
               <img
                 src={item.images[0]}
                 alt={item.name}
@@ -27,9 +30,12 @@ function Sell() {
               <h5 className="mt-2">{item.name}</h5>
               <p className="text-success fw-bold">${item.price}</p>
 
-              <button className="btn btn-dark w-100">
-                Editar
-              </button>
+              <Link
+                to={`/gestion/${item.publicId}`}
+                className="btn btn-dark w-100"
+              >
+                Editar producto
+              </Link>
             </div>
           ))}
         </div>
