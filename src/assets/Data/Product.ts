@@ -23,7 +23,7 @@ export interface Product{
 export const products = [
   {
     id: 1,
-    iduser:2,
+    iduser:3,
     publicId: "PRD-0001",
     name: "Minecraft Ps4",
     description: "Vendo minecraft de ps4",
@@ -34,7 +34,7 @@ export const products = [
   },
   {
     id: 2,
-    iduser:1,
+    iduser:3,
     publicId: "PRD-0002",
     name: "Pc Gamer",
     description: "pc gamer r5 5600 gtx 1070",

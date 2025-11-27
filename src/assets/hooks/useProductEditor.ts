@@ -8,7 +8,7 @@ export function useProductEditor(initialData: {
   const [name, setName] = useState(initialData.name);
   const [description, setDescription] = useState(initialData.description);
   const [price, setPrice] = useState(initialData.price);
-  const [error, setError] = useState(""); // 👈 agregado
+  const [error, setError] = useState(""); 
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -19,7 +19,7 @@ export function useProductEditor(initialData: {
     if (name === "description") setDescription(value);
     if (name === "price") {
       if (/[^0-9.,]/.test(value)) {
-        setError("El precio solo puede contener números."); // 👈 en vez de alert
+        setError("El precio solo puede contener números."); 
         return;
       }
       setError(""); // limpia el error si es válido

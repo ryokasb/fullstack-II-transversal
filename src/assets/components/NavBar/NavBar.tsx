@@ -2,12 +2,13 @@ import './NavBar.css';
 import logo from '../../images/LogoDuoDeal.png';
 import { FaShoppingCart } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
-import { closeSesion, getCurrentUser } from '../../Data/users';
+import { userService } from '../../Services/User/UserService';
 import Swal from "sweetalert2";
+import { UserStorage } from '../../Services/Storage/UserStorage';
 
 export default function NavBar() {
   const navigate = useNavigate();
-  const user = getCurrentUser();
+  const user = UserStorage.getUser();
 
   const handleLogout = () => {
     Swal.fire({
@@ -21,7 +22,7 @@ export default function NavBar() {
       cancelButtonText: "Cancelar"
     }).then((result) => {
       if (result.isConfirmed) {
-        closeSesion();
+        userService.logout();
         navigate("/login");
       }
     });
@@ -50,19 +51,33 @@ export default function NavBar() {
           </li>
           
         
-           
-            {user?.typeuser === "Cliente" ? (
-                  <li className="nav-item">
-                     <Link className="nav-link text-white" to="/productos">Productos</Link>
-                  </li>
-               ) : (
+           {user?.role === "USER" ? (
+           <li className="nav-item">
+              <Link className="nav-link text-white" to="/productos">
+                  Productos
+              </Link>
+                 </li>
+                   ) : user?.role === "ADMIN" ? (
                     <li className="nav-item">
-                      <Link className="nav-link text-white" to="/gestion">Gestión productos </Link>
-                      </li>
-                )}
+                     <Link className="nav-link text-white" to="/gestion">
+                      Gestión
+                    </Link>
+                   </li>
+              ) : user?.role === "DEALER" ? (
+                    <li className="nav-item">
+                     <Link className="nav-link text-white" to="/mis-productos">
+                         Mis productos
+                     </Link>
+                  </li>
+                  ) : null}
         </ul>
       </div>
-
+      {user?.role === "USER"  && (
+        <Link to="/carrito" className="navbar-cart ms-3">
+          <FaShoppingCart size={24} color="white" />
+        </Link> 
+      )}
+      
       <div className='bienvenida'>
         {user && <p>Bienvenido, {user.username}</p>}
       </div>
@@ -72,11 +87,7 @@ export default function NavBar() {
       </button>
 
       
-      {user?.typeuser === "Cliente" && (
-        <Link to="/carrito" className="navbar-cart ms-3">
-          <FaShoppingCart size={24} color="white" />
-        </Link>
-      )}
+
 
     </nav>
   );

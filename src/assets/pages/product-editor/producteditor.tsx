@@ -2,24 +2,38 @@ import { useParams } from "react-router-dom";
 import { products } from "../../Data/Product";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./producteditor.css"
-import { getCurrentUser } from "../../Data/users";
+import { UserStorage } from "../../Services/Storage/UserStorage"; 
 import { useProductEditor } from "../../hooks/useProductEditor";
 
 export default function Producteditor() {
-  const { publicId } = useParams<{ publicId: string }>();
-  const user = getCurrentUser();
+ const { publicId } = useParams<{ publicId: string }>();
+const user = UserStorage.getUser();
 
-  if (!publicId) return <p className="text-center mt-5">ID no encontrado</p>;
+if (!publicId) {
+  return <p className="text-center mt-5">ID del producto no encontrado</p>;
+}
 
-  const producto = products.find((p) => p.publicId == publicId);
+const producto = products.find((p) => String(p.publicId) === publicId);
 
-  if (producto?.iduser !== user?.id)
-    return (
-      <div className="d-flex justify-content-center align-items-center vh-100">
-        <p className="text-center">No tienes permiso para editar este producto</p>
-      </div>
-    );
+if (!producto) {
+  return <p className="text-center mt-5">Producto no encontrado</p>;
+}
 
+if (!user) {
+  return (
+    <div className="d-flex justify-content-center align-items-center vh-100">
+      <p>No estás autenticado</p>
+    </div>
+  );
+}
+
+if (String(producto.iduser) !== String(user.id)) {
+  return (
+    <div className="d-flex justify-content-center align-items-center vh-100">
+      <p className="text-center">No tienes permiso para editar este producto</p>
+    </div>
+  );
+}
   if (!producto) return <p className="text-center mt-5">Producto no encontrado</p>;
 
   const { name, description, price, handleChange,error } = useProductEditor(producto);

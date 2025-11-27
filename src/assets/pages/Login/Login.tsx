@@ -2,12 +2,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './Login.css';
 import { useLogin } from "../../hooks/useLogin";
 
+
 function Login() {
   const {
-    username,
+    mail,
     password,
     message,
-    setUsername,
+    setMail,
     setPassword,
     handleLogin
   } = useLogin();
@@ -24,13 +25,13 @@ function Login() {
 
     
         <div className="mb-3">
-          <label className="form-label fw-semibold">Usuario</label>
+          <label className="form-label fw-semibold">correo</label>
           <input
             type="text"
             className="form-control"
-            placeholder="Ingresa tu usuario"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
+            placeholder="Ingresa tu correo"
+            value={mail}
+            onChange={(e) => setMail(e.target.value)}
           />
         </div>
 

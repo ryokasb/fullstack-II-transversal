@@ -5,6 +5,8 @@ export default function Register() {
   const {
     username,
     setUsername,
+    email,
+    setEmail,
     password,
     setPassword,
     typeuser,
@@ -22,19 +24,31 @@ export default function Register() {
       >
         <h2 className="text-center mb-4 fw-bold text-primary">Crear Cuenta</h2>
 
-      
+        {/* Nombre de Usuario */}
         <div className="mb-3">
-          <label className="form-label fw-semibold">Usuario</label>
+          <label className="form-label fw-semibold">Nombre de usuario</label>
           <input
             type="text"
             className="form-control"
-            placeholder="Tu usuario"
+            placeholder="Tu nombre de usuario"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
         </div>
 
-        
+        {/* Correo */}
+        <div className="mb-3">
+          <label className="form-label fw-semibold">Correo</label>
+          <input
+            type="email"
+            className="form-control"
+            placeholder="Tu correo electrónico"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
+
+        {/* Contraseña */}
         <div className="mb-3">
           <label className="form-label fw-semibold">Contraseña</label>
           <input
@@ -46,7 +60,7 @@ export default function Register() {
           />
         </div>
 
-        
+        {/* Tipo de usuario */}
         <div className="mb-3">
           <label className="form-label fw-semibold d-block mb-2">Tipo de usuario</label>
 
@@ -77,19 +91,19 @@ export default function Register() {
           </div>
         </div>
 
-    
+        {/* Mensaje */}
         {message && (
           <div className="alert alert-info text-center py-2">
             {message}
           </div>
         )}
 
-       
+        {/* Botón */}
         <button type="submit" className="btn btn-primary w-100 fw-semibold">
           Registrarse
         </button>
 
-       
+        {/* Link de login */}
         <p className="text-center mt-3">
           ¿Ya tienes cuenta?{" "}
           <span 

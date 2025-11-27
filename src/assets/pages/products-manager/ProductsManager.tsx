@@ -1,12 +1,12 @@
 import './ProductsManager.css'
 import { products } from "../../Data/Product";
 import { Link } from "react-router-dom";
-import { getCurrentUser } from "../../Data/users";
+import { UserStorage } from '../../Services/Storage/UserStorage';
 
 function Sell() {
-  const user = getCurrentUser();
+  const userid = UserStorage.getUserId();
   
-  const productosVendedor = products.filter((p) => p.iduser === user.id);
+  const productosVendedor = products.filter((p) => String(p.iduser) === userid);
 
   return (
     <main className="sell-container container mt-5 pt-5">
@@ -31,7 +31,7 @@ function Sell() {
               <p className="text-success fw-bold">${item.price}</p>
 
               <Link
-                to={`/gestion/${item.publicId}`}
+                to={`/mis-productos/${item.publicId}`}
                 className="btn btn-dark w-100"
               >
                 Editar producto

@@ -1,80 +1,78 @@
 import { useEffect, useState } from "react";
-import { cart } from "../Data/shoppingcart"
-import type { CartItem } from "../Data/shoppingcart";
-import { products } from "../Data/Product";
-
-interface CartDisplayItem {
-  productId: string;
-  name: string;
-  price: number;
-  image: string;
-  quantity: number;
-}
+import CartService from "../Services/Cart/CartService";
+import type { CartItem, Cart, UpdateItemRequest } from "../interfaces/CartInterfaces";
+import { UserStorage } from "../Services/Storage/UserStorage";
 
 export function useCart() {
-  const [items, setItems] = useState<CartDisplayItem[]>([]);
-  const [total, setTotal] = useState(0);
+  const [items, setItems] = useState<CartItem[]>([]);
+  const [total, setTotal] = useState<number>(0);
 
-  const loadCart = () => {
-    const user = JSON.parse(localStorage.getItem("user") || "null");
-    if (!user) return;
+  const user = UserStorage.getUser();
 
-    const userCart = cart.filter((item: CartItem) => item.usuarioId === user.username);
+  // Cargar carrito desde backend
+  const loadCart = async () => {
+    if (!user?.id || !user?.token) return;
 
-    const detailedItems = userCart.map((item) => {
-      const product = products.find((p) => p.publicId === item.productId);
-      return {
-        productId: item.productId,
-        quantity: item.cantidad,
-        name: product?.name || "Producto",
-        price: product?.price || 0,
-        image: product?.images[0] || "",
-      };
-    });
-
-    setItems(detailedItems);
-
-    const totalPrice = detailedItems.reduce(
-      (acc, item) => acc + item.price * item.quantity,
-      0
-    );
-    setTotal(totalPrice);
+    try {
+      const cart: Cart = await CartService.getCart(user.id);
+      setItems(cart.items);
+      setTotal(
+        cart.items.reduce((acc, item) => acc + ((item.price ?? 0) * item.quantity), 0)
+      );
+    } catch (error) {
+      console.error("Error al cargar el carrito:", error);
+    }
   };
 
-  const updateQuantity = (productId: string, change: number) => {
-    const item = cart.find(c => c.productId === productId);
+  // Actualizar cantidad de un item usando CartItem.id
+  const updateQuantity = async (cartItemId: number, change: number) => {
+    if (!user?.id || !user?.token) return;
+
+    const item = items.find(i => i.id === cartItemId);
     if (!item) return;
 
-    item.cantidad += change;
+    const newQuantity = item.quantity + change;
+    if (newQuantity < 0) return;
 
-    if (item.cantidad <= 0) {
-      removeItem(productId);
-    } else {
-      loadCart();
+    try {
+      const request: UpdateItemRequest = { token: user.token, quantity: newQuantity };
+      await CartService.updateItem(user.id, cartItemId, request);
+      await loadCart();
+    } catch (error) {
+      console.error("Error al actualizar cantidad:", error);
     }
   };
 
-  const removeItem = (productId: string) => {
-    const index = cart.findIndex(c => c.productId === productId);
-    if (index > -1) {
-      cart.splice(index, 1);
-      loadCart();
+  // Eliminar item del carrito usando CartItem.id
+  const removeItem = async (cartItemId: number) => {
+    if (!user?.id || !user?.token) return;
+
+    const item = items.find(i => i.id === cartItemId);
+    if (!item) return;
+
+    try {
+      await CartService.removeItem(user.id, item.productId, user.token);
+      await loadCart();
+    } catch (error) {
+      console.error("Error al eliminar item:", error);
     }
   };
 
-  const clearCart = () => {
-    const user = JSON.parse(localStorage.getItem("user") || "null");
-    if (!user) return;
+  // Vaciar carrito completo
+  const clearCart = async () => {
+    if (!user?.id || !user?.token) return;
 
-    for (let i = cart.length - 1; i >= 0; i--) {
-      if (cart[i].usuarioId === user.username) {
-        cart.splice(i, 1);
-      }
+    try {
+      await CartService.clearCart(user.id, user.token);
+      await loadCart();
+    } catch (error) {
+      console.error("Error al vaciar carrito:", error);
     }
+  };
+
+  useEffect(() => {
     loadCart();
-  };
-
-  useEffect(() => { loadCart(); }, []);
+  }, []);
 
   return {
     items,

@@ -43,7 +43,7 @@ export const AppRouter = () => {
       />
 
       <Route 
-        path="/detalle/:publicId" 
+        path="/detalle/:id" 
         element={
           <PrivateRoute>
             <ProductDetail />
@@ -51,7 +51,7 @@ export const AppRouter = () => {
         } 
       />
       <Route 
-        path="/gestion" 
+        path="/mis-productos" 
         element={
           <PrivateRoute>
             <Sell />
@@ -59,7 +59,7 @@ export const AppRouter = () => {
         } 
       />
        <Route 
-        path="/gestion/:publicId" 
+        path="/mis-productos/:id" 
         element={
           <PrivateRoute>
             <ProductEditor/>
