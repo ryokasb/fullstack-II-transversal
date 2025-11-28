@@ -1,56 +1,69 @@
-import { useParams } from "react-router-dom";
-import { products } from "../../Data/Product";
+import { useParams, useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./producteditor.css"
-import { UserStorage } from "../../Services/Storage/UserStorage"; 
+import "./producteditor.css";
+import { UserStorage } from "../../Services/Storage/UserStorage";
 import { useProductEditor } from "../../hooks/useProductEditor";
 
 export default function Producteditor() {
- const { publicId } = useParams<{ publicId: string }>();
-const user = UserStorage.getUser();
+  const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
+  const user = UserStorage.getUser();
 
-if (!publicId) {
-  return <p className="text-center mt-5">ID del producto no encontrado</p>;
-}
+  if (!id) {
+    return <p className="text-center mt-5">ID de producto no encontrado</p>;
+  }
 
-const producto = products.find((p) => String(p.publicId) === publicId);
+  const numericId = Number(id);
 
-if (!producto) {
-  return <p className="text-center mt-5">Producto no encontrado</p>;
-}
+  const {
+    product,
+    loading,
+    error,
+    name,
+    price,
+    quantity,
+    description,
+    handleChange,
+    saveChanges,
+  } = useProductEditor(numericId);
 
-if (!user) {
-  return (
-    <div className="d-flex justify-content-center align-items-center vh-100">
-      <p>No estás autenticado</p>
-    </div>
-  );
-}
+  if (!user) {
+    return (
+      <div className="d-flex justify-content-center align-items-center vh-100">
+        <p>No estás autenticado</p>
+      </div>
+    );
+  }
 
-if (String(producto.iduser) !== String(user.id)) {
-  return (
-    <div className="d-flex justify-content-center align-items-center vh-100">
-      <p className="text-center">No tienes permiso para editar este producto</p>
-    </div>
-  );
-}
-  if (!producto) return <p className="text-center mt-5">Producto no encontrado</p>;
+  if (loading) return <p className="text-center mt-5">Cargando producto...</p>;
 
-  const { name, description, price, handleChange,error } = useProductEditor(producto);
+  if (!product) return <p className="text-center mt-5">Producto no encontrado</p>;
+
+  if (String(product.iduser) !== String(user.id)) {
+    return (
+      <div className="d-flex justify-content-center align-items-center vh-100">
+        <p className="text-center">
+          No tienes permiso para editar este producto
+        </p>
+      </div>
+    );
+  }
 
   return (
     <main className="container mt-5 pt-5">
+      <h2 className="text-center mb-4">Editar Producto</h2>
+
       <div className="d-flex justify-content-center mb-4">
         <img
-          src={producto.images[0]}
-          alt={producto.name}
+          src={product.photo ?? "/sin-imagen.png"}
+          alt={product.name}
           className="img-fluid rounded shadow"
           style={{ maxWidth: "500px", width: "100%", height: "auto" }}
         />
       </div>
 
-      <div className="text-left">
-        <p>nombre:</p>
+      <div>
+        <label className="fw-semibold">Nombre</label>
         <input
           type="text"
           name="name"
@@ -58,28 +71,51 @@ if (String(producto.iduser) !== String(user.id)) {
           value={name}
           onChange={handleChange}
         />
-        <p>precio:</p>
+
+        <label className="fw-semibold mt-3">Precio</label>
         <input
-          type="text"
+          type="number"
           name="price"
           className="form-control"
           value={price}
           onChange={handleChange}
         />
-        {error && <p className="text-danger">{error}</p>}
-        <p>description:</p>
+
+        <label className="fw-semibold mt-3">Cantidad</label>
         <input
-          type="text"
-          name="description"
+          type="number"
+          name="quantity"
           className="form-control"
-          value={description}
+          value={quantity}
           onChange={handleChange}
         />
+
+        <label className="fw-semibold mt-3">Descripción</label>
+        <textarea
+          name="description"
+          className="form-control"
+          value={description || ""}
+          rows={3}
+          onChange={handleChange}
+        />
+
+        {error && <p className="text-danger mt-2">{error}</p>}
       </div>
 
-      <div className="botones">
-       <button className="btn btn-primary w-100 mb-2 fw-semibold">subir</button>
-       <button className="btn btn-danger w-100 mb-2 fw-semibold">cancelar</button>
+      <div className="botones mt-4">
+        <button
+          className="btn btn-primary w-100 mb-2 fw-semibold"
+          onClick={saveChanges}
+        >
+          Guardar Cambios
+        </button>
+
+        <button
+          className="btn btn-danger w-100 fw-semibold"
+          onClick={() => navigate(-1)}
+        >
+          Cancelar
+        </button>
       </div>
     </main>
   );

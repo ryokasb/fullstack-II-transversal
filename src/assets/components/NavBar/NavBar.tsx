@@ -30,10 +30,10 @@ export default function NavBar() {
 
   return (
     <nav className="navbar navbar-expand-lg fixed-top custom-nav px-4">
-
-      <div className="navbar-brand d-flex align-items-center">
+       <Link  to={'/'}><div className="navbar-brand d-flex align-items-center">
         <img src={logo} alt="Logo DuoDeal" className="navbar__logo" />
-      </div>
+      </div></Link>
+      
 
       <button
         className="navbar-toggler bg-light"

@@ -1,29 +1,28 @@
-import './ProductsManager.css'
-import { products } from "../../Data/Product";
+import "./ProductsManager.css";
 import { Link } from "react-router-dom";
-import { UserStorage } from '../../Services/Storage/UserStorage';
+import { useProductManager } from "../../hooks/useProductManager";
 
-function Sell() {
-  const userid = UserStorage.getUserId();
-  
-  const productosVendedor = products.filter((p) => String(p.iduser) === userid);
+export default function Sell() {
+  const { filteredProducts, loading } = useProductManager();
 
   return (
     <main className="sell-container container mt-5 pt-5">
       <h2 className="mb-4">Mis productos publicados</h2>
 
-      {productosVendedor.length === 0 ? (
+      {loading ? (
+        <p className="text-muted">Cargando productos...</p>
+      ) : filteredProducts.length === 0 ? (
         <p className="text-muted">No tienes productos publicados todavía.</p>
       ) : (
         <div className="productos-grid">
-          {productosVendedor.map((item) => (
+          {filteredProducts.map((item) => (
             <div
-              key={item.publicId}
+              key={item.id}
               className="card producto-card border-0 shadow-sm p-3"
             >
               <img
-                src={item.images[0]}
-                alt={item.name}
+                src={item.photo ?? "/sin-imagen.png"}
+                alt={item.name ?? "Sin nombre"}
                 className="producto-img rounded"
               />
 
@@ -31,7 +30,7 @@ function Sell() {
               <p className="text-success fw-bold">${item.price}</p>
 
               <Link
-                to={`/mis-productos/${item.publicId}`}
+                to={`/mis-productos/${item.id}`}
                 className="btn btn-dark w-100"
               >
                 Editar producto
@@ -40,8 +39,11 @@ function Sell() {
           ))}
         </div>
       )}
+      <Link 
+              to={``}
+          className="btn btn-primary btn_nuevapublicacion"
+        >+nueva publicacion+</Link>
+      
     </main>
   );
 }
-
-export default Sell;

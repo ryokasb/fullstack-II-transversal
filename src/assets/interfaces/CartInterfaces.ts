@@ -8,6 +8,14 @@ export interface ProductoDTO {
   stock: number;
   photo?: string; 
 }
+export interface CartUIItem {
+  id: number;
+  productId: number;
+  quantity: number;
+  name: string;
+  price: number;
+  photoBase64: string | null;
+}
 
 export interface Product {
   id: number;

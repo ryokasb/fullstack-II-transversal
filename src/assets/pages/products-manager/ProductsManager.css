@@ -5,8 +5,9 @@
   gap: 20px;
   justify-content: center;
 }
-
-
+.btn_nuevapublicacion{
+  margin-top: 25px;
+}
 .producto-card {
   max-width: 500px;
   width: 100%;
